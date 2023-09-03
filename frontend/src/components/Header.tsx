@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
+import ThemeToggle from "@/components/ThemeToggle"
 
 const ROUTES = [
   {
@@ -14,12 +15,15 @@ const ROUTES = [
 
 export default function Header() {
   return (
-    <div className="flex">
+    <header className="flex p-2">
       {ROUTES.map(({ label, path }) => (
         <Button asChild variant="link">
           <Link href={path}>{label}</Link>
         </Button>
       ))}
-    </div>
+      <span className="ml-auto">
+        <ThemeToggle />
+      </span>
+    </header>
   )
 }
