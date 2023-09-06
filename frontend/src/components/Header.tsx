@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import ThemeToggle from "@/components/ThemeToggle"
+import ConnectWalletButton from "./ConnectWalletButton"
 
 const ROUTES = [
   {
@@ -21,9 +22,10 @@ export default function Header() {
           <Link href={path}>{label}</Link>
         </Button>
       ))}
-      <span className="ml-auto">
-        <ThemeToggle />
-      </span>
+      <div className="ml-auto mr-1">
+        <ConnectWalletButton />
+      </div>
+      <ThemeToggle />
     </header>
   )
 }
