@@ -1,9 +1,9 @@
 "use client"
-import NoSSR from "./NoSSR"
-import { Button } from "./ui/Button"
+import { NoSsr } from "./noSsr"
+import { Button } from "./ui/button"
 import { useAccount, useConnect } from "wagmi"
 
-function ConnectWalletButton() {
+const ConnectWalletButton = () => {
   const { isConnected, address } = useAccount()
   const { connect, connectors } = useConnect()
 
@@ -28,10 +28,12 @@ function ConnectWalletButton() {
   return <Button variant="outline">{formattedAddress}</Button>
 }
 
-export default function () {
+const Wrapped = () => {
   return (
-    <NoSSR>
+    <NoSsr>
       <ConnectWalletButton />
-    </NoSSR>
+    </NoSsr>
   )
 }
+
+export { Wrapped as ConnectWalletButton }

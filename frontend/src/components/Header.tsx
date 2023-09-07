@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/Button"
-import ThemeToggle from "@/components/ThemeToggle"
-import ConnectWalletButton from "./ConnectWalletButton"
+import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/themeToggle"
+import { ConnectWalletButton } from "./connectWalletButton"
 
 const ROUTES = [
   {
@@ -14,7 +14,7 @@ const ROUTES = [
   },
 ]
 
-export default function Header() {
+const Header = () => {
   return (
     <header className="flex p-2">
       {ROUTES.map(({ label, path }) => (
@@ -29,3 +29,5 @@ export default function Header() {
     </header>
   )
 }
+
+export { Header }

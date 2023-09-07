@@ -1,7 +1,7 @@
 "use client"
 import { ReactNode, useEffect, useState } from "react"
 
-export default function NoSSR({ children }: { children: ReactNode }) {
+const NoSsr = ({ children }: { children: ReactNode }) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -10,3 +10,5 @@ export default function NoSSR({ children }: { children: ReactNode }) {
 
   return mounted && children
 }
+
+export { NoSsr }

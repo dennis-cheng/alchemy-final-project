@@ -1,10 +1,10 @@
 "use client"
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/Button"
-import NoSSR from "./NoSSR"
+import { Button } from "@/components/ui/button"
+import { NoSsr } from "./noSsr"
 
-function ModeToggle() {
+const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme()
 
   const toggleTheme = () => {
@@ -21,10 +21,12 @@ function ModeToggle() {
   )
 }
 
-export default function () {
+const Wrapped = () => {
   return (
-    <NoSSR>
-      <ModeToggle />
-    </NoSSR>
+    <NoSsr>
+      <ThemeToggle />
+    </NoSsr>
   )
 }
+
+export { Wrapped as ThemeToggle }
