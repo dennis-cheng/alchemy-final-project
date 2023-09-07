@@ -5,7 +5,15 @@ import { parseEther } from "viem"
 import { isAddress } from "viem"
 import * as z from "zod"
 
-import { Form, FormField, FormItem, FormControl, FormMessage } from "./ui/form"
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormControl,
+  FormMessage,
+  FormDescription,
+  FormLabel,
+} from "./ui/form"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 
@@ -36,15 +44,19 @@ const TranferForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="to"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>To</FormLabel>
               <FormControl>
-                <Input placeholder="To" {...field} />
+                <Input placeholder="Address" {...field} />
               </FormControl>
+              <FormDescription>
+                This is the ethereum address you are transferring to
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -54,9 +66,13 @@ const TranferForm = () => {
           name="amount"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Amount</FormLabel>
               <FormControl>
                 <Input placeholder="Amount" type="number" {...field} />
               </FormControl>
+              <FormDescription>
+                This is the amount you would like to transfer
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
