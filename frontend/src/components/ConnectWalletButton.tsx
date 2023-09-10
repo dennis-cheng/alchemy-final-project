@@ -2,6 +2,7 @@
 import { NoSsr } from "./noSsr"
 import { Button } from "./ui/button"
 import { useAccount, useConnect } from "wagmi"
+import { AccountPopover } from "./accountPopover"
 
 const ConnectWalletButton = () => {
   const { isConnected, address } = useAccount()
@@ -25,7 +26,11 @@ const ConnectWalletButton = () => {
   }
   const formattedAddress = `${address?.slice(0, 4)}...${address?.slice(-3)}`
 
-  return <Button variant="outline">{formattedAddress}</Button>
+  return (
+    <AccountPopover>
+      <Button variant="outline">{formattedAddress}</Button>
+    </AccountPopover>
+  )
 }
 
 const Wrapped = () => {
