@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { parseEther } from "viem"
 import { isAddress } from "viem"
+import { useZarCTransfer } from "@/generated"
+import { Loader2 } from "lucide-react"
 import * as z from "zod"
 
 import {
@@ -32,14 +34,13 @@ const TranferForm = () => {
       amount: "" as any,
     },
   })
+  const { isLoading, write } = useZarCTransfer()
 
   const onSubmit = (values: transferFormSchemaType) => {
     const { to, amount } = values
-    const payload = {
-      to,
-      amount: parseEther(amount.toString()),
-    }
-    console.log(payload)
+    write({
+      args: [to, parseEther(amount.toString())],
+    })
   }
 
   return (
@@ -77,7 +78,10 @@ const TranferForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Transfer</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          Transfer
+        </Button>
       </form>
     </Form>
   )

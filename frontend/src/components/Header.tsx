@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header className="flex p-2">
       {ROUTES.map(({ label, path }) => (
-        <Button asChild variant="link">
+        <Button asChild variant="link" key={label}>
           <Link href={path}>{label}</Link>
         </Button>
       ))}
