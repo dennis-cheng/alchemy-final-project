@@ -1,41 +1,6 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/dcheng/Programming/zarc/smart-contracts/contracts/Lock.sol": {
-      "lastModificationDate": 1690733267825,
-      "contentHash": "ae66265769cc28ebdaa34881df95bc5e",
-      "sourceName": "contracts/Lock.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.9"
-      ],
-      "artifacts": [
-        "Lock"
-      ]
-    },
     "/Users/dcheng/Programming/zarc/smart-contracts/contracts/ZarC.sol": {
       "lastModificationDate": 1690824276105,
       "contentHash": "8a58272874fdd454d28e5ec486423216",
@@ -112,41 +77,6 @@
         "ERC20"
       ]
     },
-    "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1690733247164,
-      "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
-      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Context"
-      ]
-    },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
       "lastModificationDate": 1690733247182,
       "contentHash": "df36f7051335cd1e748b1b6463b7fdd3",
@@ -180,6 +110,41 @@
       ],
       "artifacts": [
         "IERC20"
+      ]
+    },
+    "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1690733247164,
+      "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Context"
       ]
     },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
