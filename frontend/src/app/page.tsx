@@ -1,9 +1,3 @@
-import { TranferForm } from "@/components/transferForm"
-
 export default function Home() {
-  return (
-    <div>
-      <TranferForm />
-    </div>
-  )
+  return <div>Home</div>
 }

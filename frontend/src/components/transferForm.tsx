@@ -26,7 +26,7 @@ const transferFormSchema = z.object({
 
 type transferFormSchemaType = z.infer<typeof transferFormSchema>
 
-const TranferForm = () => {
+const TransferForm = () => {
   const form = useForm<transferFormSchemaType>({
     resolver: zodResolver(transferFormSchema),
     defaultValues: {
@@ -87,4 +87,4 @@ const TranferForm = () => {
   )
 }
 
-export { TranferForm }
+export { TransferForm }
