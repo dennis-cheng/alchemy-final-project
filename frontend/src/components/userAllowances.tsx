@@ -14,7 +14,7 @@ export type AllowanceInfo = {
 export const columns: ColumnDef<AllowanceInfo>[] = [
   {
     accessorKey: "owner",
-    header: "Spender",
+    header: "Owner",
   },
   {
     accessorKey: "amount",
