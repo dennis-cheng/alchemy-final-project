@@ -1,19 +1,19 @@
 "use client"
 import { useAccount } from "wagmi"
 import { isAddress, Address, formatEther } from "viem"
-import { useZarCGetApprovals } from "@/generated"
 import { ColumnDef } from "@tanstack/react-table"
+import { useZarCGetAllowances } from "@/generated"
 import { DataTable } from "./dataTable"
 import { NoSsr } from "./noSsr"
 
-export type ApprovalInfo = {
-  spender: Address
+export type AllowanceInfo = {
+  owner: Address
   amount: String
 }
 
-export const columns: ColumnDef<ApprovalInfo>[] = [
+export const columns: ColumnDef<AllowanceInfo>[] = [
   {
-    accessorKey: "spender",
+    accessorKey: "owner",
     header: "Spender",
   },
   {
@@ -22,26 +22,26 @@ export const columns: ColumnDef<ApprovalInfo>[] = [
   },
 ]
 
-const UserApprovals = () => {
+const UserAllowances = () => {
   const { address } = useAccount()
-  const { data } = useZarCGetApprovals({
+  const { data } = useZarCGetAllowances({
     args: [address as any],
     enabled: isAddress(address as string),
   })
 
-  const approvals =
-    data?.map(({ spender, amount }) => ({
-      spender,
+  const allowances =
+    data?.map(({ owner, amount }) => ({
+      owner,
       amount: formatEther(amount),
     })) || []
 
-  return <DataTable columns={columns} data={approvals} />
+  return <DataTable columns={columns} data={allowances} />
 }
 
 const Wrapped = () => (
   <NoSsr>
-    <UserApprovals />
+    <UserAllowances />
   </NoSsr>
 )
 
-export { Wrapped as UserApprovals }
+export { Wrapped as UserAllowances }

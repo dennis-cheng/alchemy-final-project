@@ -12,6 +12,14 @@ const ROUTES = [
     label: "Approve",
     path: "/approve",
   },
+  {
+    label: "Allowances",
+    path: "/allowances",
+  },
+  {
+    label: "Approvals",
+    path: "/approvals",
+  },
 ]
 
 const Header = () => {
