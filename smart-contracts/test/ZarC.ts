@@ -10,7 +10,6 @@ describe("ZarC", function () {
     async function deployZarCFixture() {
         const ZarC = await ethers.getContractFactory("ZarC");
         const zarC = await ZarC.deploy(INITIAL_SUPPLY);
-
         return { zarC };
     }
 
@@ -26,6 +25,30 @@ describe("ZarC", function () {
         it("Should set initial supply", async function () {
             const { zarC } = await loadFixture(deployZarCFixture);
             expect(await zarC.totalSupply()).to.equal(INITIAL_SUPPLY);
+        })
+    })
+
+    describe("Approve function", function () {
+        it("Should add spender to owner's list of approvals", async function () {
+            const { zarC } = await loadFixture(deployZarCFixture);
+            const [owner, spender] = await ethers.getSigners()
+            const amount = ethers.parseEther("100")
+            const transaction = await zarC.approve(spender, amount)
+            await transaction.wait()
+
+            const ownerApprovals = await zarC.getApprovals(owner)
+            expect(ownerApprovals).to.include.deep.members([[spender.address, amount]])
+        })
+
+        it("Should add owner to spender's list of allowances", async function () {
+            const { zarC } = await loadFixture(deployZarCFixture);
+            const [owner, spender] = await ethers.getSigners()
+            const amount = ethers.parseEther("100")
+            const transaction = await zarC.approve(spender, amount)
+            await transaction.wait()
+
+            const spenderAllowances = await zarC.getAllowances(spender)
+            expect(spenderAllowances).to.include.deep.members([[owner.address, amount]])
         })
     })
 })

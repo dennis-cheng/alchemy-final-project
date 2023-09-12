@@ -23,6 +23,28 @@ import type {
   TypedContractMethod,
 } from "../common";
 
+export declare namespace ZarC {
+  export type AllowanceInfoStruct = {
+    owner: AddressLike;
+    amount: BigNumberish;
+  };
+
+  export type AllowanceInfoStructOutput = [owner: string, amount: bigint] & {
+    owner: string;
+    amount: bigint;
+  };
+
+  export type ApprovalInfoStruct = {
+    spender: AddressLike;
+    amount: BigNumberish;
+  };
+
+  export type ApprovalInfoStructOutput = [spender: string, amount: bigint] & {
+    spender: string;
+    amount: bigint;
+  };
+}
+
 export interface ZarCInterface extends Interface {
   getFunction(
     nameOrSignature:
@@ -31,6 +53,8 @@ export interface ZarCInterface extends Interface {
       | "balanceOf"
       | "decimals"
       | "decreaseAllowance"
+      | "getAllowances"
+      | "getApprovals"
       | "increaseAllowance"
       | "name"
       | "symbol"
@@ -59,6 +83,14 @@ export interface ZarCInterface extends Interface {
     values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "getAllowances",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getApprovals",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "increaseAllowance",
     values: [AddressLike, BigNumberish]
   ): string;
@@ -83,6 +115,14 @@ export interface ZarCInterface extends Interface {
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "decreaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllowances",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getApprovals",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -203,6 +243,18 @@ export interface ZarC extends BaseContract {
     "nonpayable"
   >;
 
+  getAllowances: TypedContractMethod<
+    [spender: AddressLike],
+    [ZarC.AllowanceInfoStructOutput[]],
+    "view"
+  >;
+
+  getApprovals: TypedContractMethod<
+    [owner: AddressLike],
+    [ZarC.ApprovalInfoStructOutput[]],
+    "view"
+  >;
+
   increaseAllowance: TypedContractMethod<
     [spender: AddressLike, addedValue: BigNumberish],
     [boolean],
@@ -257,6 +309,20 @@ export interface ZarC extends BaseContract {
     [spender: AddressLike, subtractedValue: BigNumberish],
     [boolean],
     "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "getAllowances"
+  ): TypedContractMethod<
+    [spender: AddressLike],
+    [ZarC.AllowanceInfoStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getApprovals"
+  ): TypedContractMethod<
+    [owner: AddressLike],
+    [ZarC.ApprovalInfoStructOutput[]],
+    "view"
   >;
   getFunction(
     nameOrSignature: "increaseAllowance"
