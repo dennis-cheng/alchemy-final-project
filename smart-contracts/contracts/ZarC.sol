@@ -26,8 +26,8 @@ contract ZarC is ERC20 {
         address owner = _msgSender();
         bool success = ERC20.approve(spender, amount);
         require(success, "Failed to approve ");
-        approvals[owner].push(spender);
-        allowances[spender].push(owner);
+        _upsertApproval(owner, spender);
+        _upsertAllowance(spender, owner);
 
         return true;
     }
@@ -61,5 +61,33 @@ contract ZarC is ERC20 {
             });
         }
         return allowanceInfo;
+    }
+
+    function _upsertApproval(address owner, address spender) internal {
+        address[] storage ownerApprovals = approvals[owner];
+        bool found = false;
+        for (uint i = 0; i < ownerApprovals.length; i++) {
+            if (ownerApprovals[i] == spender) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            ownerApprovals.push(spender);
+        }
+    }
+
+    function _upsertAllowance(address spender, address owner) internal {
+        address[] storage spenderAllowances = allowances[spender];
+        bool found = false;
+        for (uint i = 0; i < spenderAllowances.length; i++) {
+            if (spenderAllowances[i] == owner) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            spenderAllowances.push(owner);
+        }
     }
 }
