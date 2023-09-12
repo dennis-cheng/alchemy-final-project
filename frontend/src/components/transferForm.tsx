@@ -1,8 +1,8 @@
 "use client"
 import { useForm } from "react-hook-form"
+import { useWaitForTransaction } from "wagmi"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { parseEther } from "viem"
-import { isAddress } from "viem"
+import { parseEther, isAddress } from "viem"
 import { useZarCTransfer } from "@/generated"
 import { Loader2 } from "lucide-react"
 import * as z from "zod"
@@ -34,7 +34,10 @@ const TransferForm = () => {
       amount: "" as any,
     },
   })
-  const { isLoading, write } = useZarCTransfer()
+  const { isLoading, write, data } = useZarCTransfer()
+  const { data: transactionData } = useWaitForTransaction({
+    hash: data?.hash,
+  })
 
   const onSubmit = (values: transferFormSchemaType) => {
     const { to, amount } = values
@@ -42,6 +45,8 @@ const TransferForm = () => {
       args: [to, parseEther(amount.toString())],
     })
   }
+
+  console.log(transactionData)
 
   return (
     <Form {...form}>
