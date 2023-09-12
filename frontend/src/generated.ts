@@ -491,6 +491,40 @@ export const zarCABI = [
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
   },
   {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [{ name: 'spender', internalType: 'address', type: 'address' }],
+    name: 'getAllowances',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct ZarC.AllowanceInfo[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'owner', internalType: 'address', type: 'address' },
+          { name: 'amount', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'getApprovals',
+    outputs: [
+      {
+        name: '',
+        internalType: 'struct ZarC.ApprovalInfo[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'spender', internalType: 'address', type: 'address' },
+          { name: 'amount', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+  },
+  {
     stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
@@ -1739,6 +1773,50 @@ export function useZarCDecimals<
     abi: zarCABI,
     address: zarCAddress[31337],
     functionName: 'decimals',
+    ...config,
+  } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"getAllowances"`.
+ *
+ *
+ */
+export function useZarCGetAllowances<
+  TFunctionName extends 'getAllowances',
+  TSelectData = ReadContractResult<typeof zarCABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof zarCAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: zarCABI,
+    address: zarCAddress[31337],
+    functionName: 'getAllowances',
+    ...config,
+  } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"getApprovals"`.
+ *
+ *
+ */
+export function useZarCGetApprovals<
+  TFunctionName extends 'getApprovals',
+  TSelectData = ReadContractResult<typeof zarCABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof zarCAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: zarCABI,
+    address: zarCAddress[31337],
+    functionName: 'getApprovals',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
 }

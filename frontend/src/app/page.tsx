@@ -1,3 +1,9 @@
+import { UserApprovals } from "@/components/userApprovals"
+
 export default function Home() {
-  return <div>Hello</div>
+  return (
+    <div>
+      <UserApprovals />
+    </div>
+  )
 }
