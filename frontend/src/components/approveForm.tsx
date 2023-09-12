@@ -19,6 +19,7 @@ import {
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { useAccount } from "wagmi"
+import { NoSsr } from "./noSsr"
 
 const approveFormSchema = z.object({
   spender: z
@@ -82,14 +83,16 @@ const ApproveForm = () => {
             </FormItem>
           )}
         />
-        {!isConnected ? (
-          <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
-        ) : (
-          <Button type="submit" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Approve
-          </Button>
-        )}
+        <NoSsr>
+          {!isConnected ? (
+            <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
+          ) : (
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Approve
+            </Button>
+          )}
+        </NoSsr>
       </form>
     </Form>
   )

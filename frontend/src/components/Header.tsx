@@ -9,6 +9,10 @@ const ROUTES = [
     path: "/transfer",
   },
   {
+    label: "Transfer From",
+    path: "/transferFrom",
+  },
+  {
     label: "Approve",
     path: "/approve",
   },

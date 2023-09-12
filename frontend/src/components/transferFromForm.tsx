@@ -1,54 +1,72 @@
 "use client"
-import { useForm } from "react-hook-form"
+import { useZarCTransferFrom } from "@/generated"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { parseEther, isAddress } from "viem"
-import { useZarCTransfer } from "@/generated"
-import { Loader2 } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { isAddress, parseEther } from "viem"
+import { useAccount } from "wagmi"
 import * as z from "zod"
-import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
-
 import {
   Form,
   FormField,
   FormItem,
+  FormLabel,
   FormControl,
   FormMessage,
   FormDescription,
-  FormLabel,
 } from "./ui/form"
 import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { useAccount } from "wagmi"
 import { NoSsr } from "./noSsr"
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
+import { Button } from "./ui/button"
+import { Loader2 } from "lucide-react"
 
-const transferFormSchema = z.object({
+const transferFromFormSchema = z.object({
+  from: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
   to: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
   amount: z.coerce.number().positive(),
 })
 
-type transferFormSchemaType = z.infer<typeof transferFormSchema>
+type transferFromFormSchemaType = z.infer<typeof transferFromFormSchema>
 
-const TransferForm = () => {
-  const form = useForm<transferFormSchemaType>({
-    resolver: zodResolver(transferFormSchema),
+const TransferFromForm = () => {
+  const form = useForm<transferFromFormSchemaType>({
+    resolver: zodResolver(transferFromFormSchema),
     defaultValues: {
+      from: "" as any,
       to: "" as any,
       amount: "" as any,
     },
   })
-  const { isLoading, write, data } = useZarCTransfer()
+
+  const { isLoading, write, data } = useZarCTransferFrom()
   const { isConnected } = useAccount()
 
-  const onSubmit = (values: transferFormSchemaType) => {
-    const { to, amount } = values
+  const onSubmit = (values: transferFromFormSchemaType) => {
+    const { from, to, amount } = values
     write({
-      args: [to, parseEther(amount.toString())],
+      args: [from, to, parseEther(amount.toString())],
     })
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="from"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>From</FormLabel>
+              <FormControl>
+                <Input placeholder="Address" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is the ethereum address you are transferring from
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="to"
@@ -72,7 +90,7 @@ const TransferForm = () => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="Amount" type="number" {...field} />
+                <Input placeholder="Amount" {...field} />
               </FormControl>
               <FormDescription>
                 This is the amount you would like to transfer
@@ -96,4 +114,4 @@ const TransferForm = () => {
   )
 }
 
-export { TransferForm }
+export { TransferFromForm }
