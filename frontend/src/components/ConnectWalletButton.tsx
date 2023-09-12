@@ -3,26 +3,13 @@ import { NoSsr } from "./noSsr"
 import { Button } from "./ui/button"
 import { useAccount, useConnect } from "wagmi"
 import { AccountPopover } from "./accountPopover"
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
 
 const ConnectWalletButton = () => {
   const { isConnected, address } = useAccount()
-  const { connect, connectors } = useConnect()
 
   if (!isConnected) {
-    return (
-      <>
-        {connectors.map((connector) => (
-          <Button
-            variant="outline"
-            key={connector.id}
-            disabled={!connector.ready}
-            onClick={() => connect({ connector })}
-          >
-            {connector.name}
-          </Button>
-        ))}
-      </>
-    )
+    return <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
   }
   const formattedAddress = `${address?.slice(0, 4)}...${address?.slice(-3)}`
 

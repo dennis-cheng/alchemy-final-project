@@ -5,6 +5,7 @@ import { parseEther, isAddress } from "viem"
 import { useZarCApprove } from "@/generated"
 import { Loader2 } from "lucide-react"
 import * as z from "zod"
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
 
 import {
   Form,
@@ -17,6 +18,7 @@ import {
 } from "./ui/form"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
+import { useAccount } from "wagmi"
 
 const approveFormSchema = z.object({
   spender: z
@@ -36,6 +38,7 @@ const ApproveForm = () => {
     },
   })
   const { isLoading, write } = useZarCApprove()
+  const { isConnected } = useAccount()
 
   const onSubmit = (values: approveFormSchemaType) => {
     const { spender, amount } = values
@@ -79,10 +82,14 @@ const ApproveForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Approve
-        </Button>
+        {!isConnected ? (
+          <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
+        ) : (
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Approve
+          </Button>
+        )}
       </form>
     </Form>
   )

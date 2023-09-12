@@ -1,11 +1,11 @@
 "use client"
 import { useForm } from "react-hook-form"
-import { useWaitForTransaction } from "wagmi"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { parseEther, isAddress } from "viem"
 import { useZarCTransfer } from "@/generated"
 import { Loader2 } from "lucide-react"
 import * as z from "zod"
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
 
 import {
   Form,
@@ -18,6 +18,7 @@ import {
 } from "./ui/form"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
+import { useAccount } from "wagmi"
 
 const transferFormSchema = z.object({
   to: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
@@ -35,9 +36,7 @@ const TransferForm = () => {
     },
   })
   const { isLoading, write, data } = useZarCTransfer()
-  const { data: transactionData } = useWaitForTransaction({
-    hash: data?.hash,
-  })
+  const { isConnected } = useAccount()
 
   const onSubmit = (values: transferFormSchemaType) => {
     const { to, amount } = values
@@ -45,8 +44,6 @@ const TransferForm = () => {
       args: [to, parseEther(amount.toString())],
     })
   }
-
-  console.log(transactionData)
 
   return (
     <Form {...form}>
@@ -83,10 +80,14 @@ const TransferForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Transfer
-        </Button>
+        {!isConnected ? (
+          <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
+        ) : (
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Transfer
+          </Button>
+        )}
       </form>
     </Form>
   )
