@@ -15,7 +15,6 @@ import {
   FormDescription,
 } from "./ui/form"
 import { Input } from "./ui/input"
-import { NoSsr } from "./noSsr"
 import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
 import { Button } from "./ui/button"
 import { Loader2 } from "lucide-react"
@@ -99,16 +98,14 @@ const TransferFromForm = () => {
             </FormItem>
           )}
         />
-        <NoSsr>
-          {!isConnected ? (
-            <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
-          ) : (
-            <Button type="submit" disabled={isLoading}>
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Transfer
-            </Button>
-          )}
-        </NoSsr>
+        {!isConnected ? (
+          <ConnectMetaMaskButton>Connect</ConnectMetaMaskButton>
+        ) : (
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Transfer
+          </Button>
+        )}
       </form>
     </Form>
   )

@@ -1,5 +1,4 @@
 "use client"
-import { NoSsr } from "./noSsr"
 import { Button } from "./ui/button"
 import { useAccount, useConnect } from "wagmi"
 import { AccountPopover } from "./accountPopover"
@@ -20,12 +19,4 @@ const ConnectWalletButton = () => {
   )
 }
 
-const Wrapped = () => {
-  return (
-    <NoSsr>
-      <ConnectWalletButton />
-    </NoSsr>
-  )
-}
-
-export { Wrapped as ConnectWalletButton }
+export { ConnectWalletButton }

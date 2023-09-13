@@ -2,7 +2,6 @@
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { NoSsr } from "./noSsr"
 
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme()
@@ -21,12 +20,4 @@ const ThemeToggle = () => {
   )
 }
 
-const Wrapped = () => {
-  return (
-    <NoSsr>
-      <ThemeToggle />
-    </NoSsr>
-  )
-}
-
-export { Wrapped as ThemeToggle }
+export { ThemeToggle }

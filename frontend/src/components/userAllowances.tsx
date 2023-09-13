@@ -4,7 +4,6 @@ import { isAddress, Address, formatEther } from "viem"
 import { ColumnDef } from "@tanstack/react-table"
 import { useZarCGetAllowances } from "@/generated"
 import { DataTable } from "./dataTable"
-import { NoSsr } from "./noSsr"
 
 export type AllowanceInfo = {
   owner: Address
@@ -38,10 +37,4 @@ const UserAllowances = () => {
   return <DataTable columns={columns} data={allowances} />
 }
 
-const Wrapped = () => (
-  <NoSsr>
-    <UserAllowances />
-  </NoSsr>
-)
-
-export { Wrapped as UserAllowances }
+export { UserAllowances }

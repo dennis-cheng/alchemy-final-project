@@ -4,7 +4,6 @@ import { isAddress, Address, formatEther } from "viem"
 import { useZarCGetApprovals } from "@/generated"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "./dataTable"
-import { NoSsr } from "./noSsr"
 
 export type ApprovalInfo = {
   spender: Address
@@ -38,10 +37,4 @@ const UserApprovals = () => {
   return <DataTable columns={columns} data={approvals} />
 }
 
-const Wrapped = () => (
-  <NoSsr>
-    <UserApprovals />
-  </NoSsr>
-)
-
-export { Wrapped as UserApprovals }
+export { UserApprovals }
