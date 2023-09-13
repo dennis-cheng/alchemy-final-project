@@ -2,12 +2,13 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/dcheng/Programming/zarc/smart-contracts/contracts/ZarC.sol": {
-      "lastModificationDate": 1694545838771,
-      "contentHash": "b2bc5479e5f04a1985240bbd12c835a1",
+      "lastModificationDate": 1694611334356,
+      "contentHash": "52174e07ae44f10e4c172c25d491a4d6",
       "sourceName": "contracts/ZarC.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.20",
         "settings": {
+          "evmVersion": "paris",
           "optimizer": {
             "enabled": false,
             "runs": 200
@@ -32,19 +33,20 @@
         "@openzeppelin/contracts/token/ERC20/ERC20.sol"
       ],
       "versionPragmas": [
-        "^0.8.19"
+        "^0.8.20"
       ],
       "artifacts": [
         "ZarC"
       ]
     },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1690733247182,
+      "lastModificationDate": 1694508492289,
       "contentHash": "3ae5166c6827a9cf1a7a462d1632b464",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.20",
         "settings": {
+          "evmVersion": "paris",
           "optimizer": {
             "enabled": false,
             "runs": 200
@@ -78,12 +80,13 @@
       ]
     },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1690733247182,
+      "lastModificationDate": 1694508492289,
       "contentHash": "df36f7051335cd1e748b1b6463b7fdd3",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.20",
         "settings": {
+          "evmVersion": "paris",
           "optimizer": {
             "enabled": false,
             "runs": 200
@@ -113,12 +116,13 @@
       ]
     },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1690733247164,
+      "lastModificationDate": 1694508492288,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.20",
         "settings": {
+          "evmVersion": "paris",
           "optimizer": {
             "enabled": false,
             "runs": 200
@@ -148,12 +152,13 @@
       ]
     },
     "/Users/dcheng/Programming/zarc/smart-contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1690733247182,
+      "lastModificationDate": 1694508492289,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.19",
+        "version": "0.8.20",
         "settings": {
+          "evmVersion": "paris",
           "optimizer": {
             "enabled": false,
             "runs": 200
@@ -182,6 +187,45 @@
       ],
       "artifacts": [
         "IERC20Metadata"
+      ]
+    },
+    "/Users/dcheng/Programming/zarc/smart-contracts/contracts/ERC20Faucet.sol": {
+      "lastModificationDate": 1694635555996,
+      "contentHash": "b4e55b382eba697fa9cc27d9a1cc11bd",
+      "sourceName": "contracts/ERC20Faucet.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Context.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC20Faucet"
       ]
     }
   }

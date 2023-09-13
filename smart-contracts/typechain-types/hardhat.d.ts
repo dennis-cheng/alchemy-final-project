@@ -26,6 +26,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
     getContractFactory(
+      name: "ERC20Faucet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20Faucet__factory>;
+    getContractFactory(
       name: "ZarC",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ZarC__factory>;
@@ -46,6 +50,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
     getContractAt(
+      name: "ERC20Faucet",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Faucet>;
+    getContractAt(
       name: "ZarC",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -64,6 +73,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC20>;
     deployContract(
+      name: "ERC20Faucet",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ERC20Faucet>;
+    deployContract(
       name: "ZarC",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ZarC>;
@@ -83,6 +96,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC20>;
+    deployContract(
+      name: "ERC20Faucet",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ERC20Faucet>;
     deployContract(
       name: "ZarC",
       args: any[],
