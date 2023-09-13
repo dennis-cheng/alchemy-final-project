@@ -17,6 +17,10 @@ const ROUTES = [
     path: "/approve",
   },
   {
+    label: "Faucet",
+    path: "/faucet",
+  },
+  {
     label: "Allowances",
     path: "/allowances",
   },

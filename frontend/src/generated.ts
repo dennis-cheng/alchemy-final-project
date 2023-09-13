@@ -167,6 +167,87 @@ export const erc20ABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ERC20Faucet
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ *
+ */
+export const erc20FaucetABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_tokenAddress', internalType: 'address', type: 'address' },
+      { name: '_dripAmount', internalType: 'uint256', type: 'uint256' },
+      { name: '_dripInterval', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'receiver',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Drip',
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [],
+    name: 'drip',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'dripAmount',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'dripInterval',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'token',
+    outputs: [{ name: '', internalType: 'contract IERC20', type: 'address' }],
+  },
+] as const
+
+/**
+ *
+ */
+export const erc20FaucetAddress = {
+  31337: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+} as const
+
+/**
+ *
+ */
+export const erc20FaucetConfig = {
+  address: erc20FaucetAddress,
+  abi: erc20FaucetABI,
+} as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IERC20
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1021,6 +1102,232 @@ export function useErc20TransferEvent(
     eventName: 'Transfer',
     ...config,
   } as UseContractEventConfig<typeof erc20ABI, 'Transfer'>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__.
+ *
+ *
+ */
+export function useErc20FaucetRead<
+  TFunctionName extends string,
+  TSelectData = ReadContractResult<typeof erc20FaucetABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    ...config,
+  } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"dripAmount"`.
+ *
+ *
+ */
+export function useErc20FaucetDripAmount<
+  TFunctionName extends 'dripAmount',
+  TSelectData = ReadContractResult<typeof erc20FaucetABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    functionName: 'dripAmount',
+    ...config,
+  } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"dripInterval"`.
+ *
+ *
+ */
+export function useErc20FaucetDripInterval<
+  TFunctionName extends 'dripInterval',
+  TSelectData = ReadContractResult<typeof erc20FaucetABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    functionName: 'dripInterval',
+    ...config,
+  } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"token"`.
+ *
+ *
+ */
+export function useErc20FaucetToken<
+  TFunctionName extends 'token',
+  TSelectData = ReadContractResult<typeof erc20FaucetABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractRead({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    functionName: 'token',
+    ...config,
+  } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__.
+ *
+ *
+ */
+export function useErc20FaucetWrite<
+  TFunctionName extends string,
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof erc20FaucetAddress,
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof erc20FaucetABI,
+          string
+        >['request']['abi'],
+        TFunctionName,
+        TMode
+      > & { address?: Address; chainId?: TChainId }
+    : UseContractWriteConfig<typeof erc20FaucetABI, TFunctionName, TMode> & {
+        abi?: never
+        address?: never
+        chainId?: TChainId
+      } = {} as any,
+) {
+  return useContractWrite<typeof erc20FaucetABI, TFunctionName, TMode>({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    ...config,
+  } as any)
+}
+
+/**
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"drip"`.
+ *
+ *
+ */
+export function useErc20FaucetDrip<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof erc20FaucetAddress,
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof erc20FaucetABI,
+          'drip'
+        >['request']['abi'],
+        'drip',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'drip' }
+    : UseContractWriteConfig<typeof erc20FaucetABI, 'drip', TMode> & {
+        abi?: never
+        address?: never
+        chainId?: TChainId
+        functionName?: 'drip'
+      } = {} as any,
+) {
+  return useContractWrite<typeof erc20FaucetABI, 'drip', TMode>({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    functionName: 'drip',
+    ...config,
+  } as any)
+}
+
+/**
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__.
+ *
+ *
+ */
+export function usePrepareErc20FaucetWrite<TFunctionName extends string>(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof erc20FaucetABI, TFunctionName>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return usePrepareContractWrite({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof erc20FaucetABI, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"drip"`.
+ *
+ *
+ */
+export function usePrepareErc20FaucetDrip(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof erc20FaucetABI, 'drip'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return usePrepareContractWrite({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    functionName: 'drip',
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof erc20FaucetABI, 'drip'>)
+}
+
+/**
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link erc20FaucetABI}__.
+ *
+ *
+ */
+export function useErc20FaucetEvent<TEventName extends string>(
+  config: Omit<
+    UseContractEventConfig<typeof erc20FaucetABI, TEventName>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractEvent({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    ...config,
+  } as UseContractEventConfig<typeof erc20FaucetABI, TEventName>)
+}
+
+/**
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link erc20FaucetABI}__ and `eventName` set to `"Drip"`.
+ *
+ *
+ */
+export function useErc20FaucetDripEvent(
+  config: Omit<
+    UseContractEventConfig<typeof erc20FaucetABI, 'Drip'>,
+    'abi' | 'address' | 'eventName'
+  > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
+) {
+  return useContractEvent({
+    abi: erc20FaucetABI,
+    address: erc20FaucetAddress[31337],
+    eventName: 'Drip',
+    ...config,
+  } as UseContractEventConfig<typeof erc20FaucetABI, 'Drip'>)
 }
 
 /**

@@ -37,7 +37,7 @@ const TransferFromForm = () => {
     },
   })
 
-  const { isLoading, write, data } = useZarCTransferFrom()
+  const { isLoading, write } = useZarCTransferFrom()
   const { isConnected } = useAccount()
 
   const onSubmit = (values: transferFromFormSchemaType) => {

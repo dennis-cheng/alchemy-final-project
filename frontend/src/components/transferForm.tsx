@@ -35,7 +35,7 @@ const TransferForm = () => {
       amount: "" as any,
     },
   })
-  const { isLoading, write, data } = useZarCTransfer()
+  const { isLoading, write } = useZarCTransfer()
   const { isConnected } = useAccount()
 
   const onSubmit = (values: transferFormSchemaType) => {
