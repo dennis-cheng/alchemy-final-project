@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "./ui/button"
-import { useAccount, useConnect } from "wagmi"
+import { useAccount } from "wagmi"
 import { AccountPopover } from "./accountPopover"
 import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
 
