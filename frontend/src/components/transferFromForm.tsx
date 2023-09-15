@@ -1,10 +1,10 @@
-"use client"
-import { useZarCTransferFrom } from "@/generated"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { isAddress, parseEther } from "viem"
-import { useAccount } from "wagmi"
-import * as z from "zod"
+"use client";
+import { useZarCTransferFrom } from "@/generated";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { isAddress, parseEther } from "viem";
+import { useAccount } from "wagmi";
+import * as z from "zod";
 import {
   Form,
   FormField,
@@ -13,19 +13,21 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from "./ui/form"
-import { Input } from "./ui/input"
-import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
-import { Button } from "./ui/button"
-import { Loader2 } from "lucide-react"
+} from "./ui/form";
+import { Input } from "./ui/input";
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton";
+import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
+import { useUserBalance } from "@/hooks/useUserBalance";
 
 const transferFromFormSchema = z.object({
   from: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
   to: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
   amount: z.coerce.number().positive(),
-})
+});
 
-type transferFromFormSchemaType = z.infer<typeof transferFromFormSchema>
+type transferFromFormSchemaType = z.infer<typeof transferFromFormSchema>;
 
 const TransferFromForm = () => {
   const form = useForm<transferFromFormSchemaType>({
@@ -35,17 +37,22 @@ const TransferFromForm = () => {
       to: "" as any,
       amount: "" as any,
     },
-  })
+  });
 
-  const { isLoading, write } = useZarCTransferFrom()
-  const { isConnected } = useAccount()
+  const { isLoading, write, isSuccess } = useZarCTransferFrom();
+  const { isConnected } = useAccount();
+  const { refetch } = useUserBalance();
+
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess]);
 
   const onSubmit = (values: transferFromFormSchemaType) => {
-    const { from, to, amount } = values
+    const { from, to, amount } = values;
     write({
       args: [from, to, parseEther(amount.toString())],
-    })
-  }
+    });
+  };
 
   return (
     <Form {...form}>
@@ -108,7 +115,7 @@ const TransferFromForm = () => {
         )}
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export { TransferFromForm }
+export { TransferFromForm };

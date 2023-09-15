@@ -1,11 +1,11 @@
-"use client"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { parseEther, isAddress } from "viem"
-import { useZarCTransfer } from "@/generated"
-import { Loader2 } from "lucide-react"
-import * as z from "zod"
-import { ConnectMetaMaskButton } from "./connectMetaMaskButton"
+"use client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { parseEther, isAddress } from "viem";
+import { useZarCTransfer } from "@/generated";
+import { Loader2 } from "lucide-react";
+import * as z from "zod";
+import { ConnectMetaMaskButton } from "./connectMetaMaskButton";
 
 import {
   Form,
@@ -15,17 +15,19 @@ import {
   FormMessage,
   FormDescription,
   FormLabel,
-} from "./ui/form"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { useAccount } from "wagmi"
+} from "./ui/form";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { useAccount } from "wagmi";
+import { useEffect } from "react";
+import { useUserBalance } from "@/hooks/useUserBalance";
 
 const transferFormSchema = z.object({
   to: z.string().refine(isAddress, { message: "Invalid ethereum address" }),
   amount: z.coerce.number().positive(),
-})
+});
 
-type transferFormSchemaType = z.infer<typeof transferFormSchema>
+type transferFormSchemaType = z.infer<typeof transferFormSchema>;
 
 const TransferForm = () => {
   const form = useForm<transferFormSchemaType>({
@@ -34,16 +36,21 @@ const TransferForm = () => {
       to: "" as any,
       amount: "" as any,
     },
-  })
-  const { isLoading, write } = useZarCTransfer()
-  const { isConnected } = useAccount()
+  });
+  const { isLoading, write, isSuccess } = useZarCTransfer();
+  const { isConnected } = useAccount();
+  const { refetch } = useUserBalance();
+
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess]);
 
   const onSubmit = (values: transferFormSchemaType) => {
-    const { to, amount } = values
+    const { to, amount } = values;
     write({
       args: [to, parseEther(amount.toString())],
-    })
-  }
+    });
+  };
 
   return (
     <Form {...form}>
@@ -90,7 +97,7 @@ const TransferForm = () => {
         )}
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export { TransferForm }
+export { TransferForm };
