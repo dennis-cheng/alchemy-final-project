@@ -1,9 +1,13 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/themeToggle"
-import { ConnectWalletButton } from "./connectWalletButton"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/themeToggle";
+import { ConnectWalletButton } from "./connectWalletButton";
 
 const ROUTES = [
+  {
+    label: "Home",
+    path: "/",
+  },
   {
     label: "Transfer",
     path: "/transfer",
@@ -28,7 +32,7 @@ const ROUTES = [
     label: "Approvals",
     path: "/approvals",
   },
-]
+];
 
 const Header = () => {
   return (
@@ -43,7 +47,7 @@ const Header = () => {
       </div>
       <ThemeToggle />
     </header>
-  )
-}
+  );
+};
 
-export { Header }
+export { Header };
