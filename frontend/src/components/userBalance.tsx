@@ -1,10 +1,9 @@
-"use client"
-import { useUserBalance } from "@/hooks/useUserBalance"
+"use client";
+import { useUserBalance } from "@/hooks/useUserBalance";
 
 const UserBalance = () => {
-  const { balance } = useUserBalance()
+  const { balance } = useUserBalance();
+  return <>{balance}</>;
+};
 
-  return <>{balance}</>
-}
-
-export { UserBalance }
+export { UserBalance };

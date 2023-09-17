@@ -7,6 +7,8 @@ import {
   UsePrepareContractWriteConfig,
   useContractEvent,
   UseContractEventConfig,
+  useNetwork,
+  useChainId,
   Address,
 } from 'wagmi'
 import {
@@ -171,7 +173,8 @@ export const erc20ABI = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export const erc20FaucetABI = [
   {
@@ -233,14 +236,17 @@ export const erc20FaucetABI = [
 ] as const
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export const erc20FaucetAddress = {
   31337: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+  11155111: '0xacd362a06092E1598F4f57D124F3D5E0F31b1F85',
 } as const
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export const erc20FaucetConfig = {
   address: erc20FaucetAddress,
@@ -477,7 +483,8 @@ export const ierc20MetadataABI = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export const zarCABI = [
   {
@@ -660,14 +667,17 @@ export const zarCABI = [
 ] as const
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export const zarCAddress = {
   31337: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  11155111: '0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530',
 } as const
 
 /**
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export const zarCConfig = { address: zarCAddress, abi: zarCABI } as const
 
@@ -1107,7 +1117,8 @@ export function useErc20TransferEvent(
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetRead<
   TFunctionName extends string,
@@ -1118,9 +1129,12 @@ export function useErc20FaucetRead<
     'abi' | 'address'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     ...config,
   } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
 }
@@ -1128,7 +1142,8 @@ export function useErc20FaucetRead<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"dripAmount"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetDripAmount<
   TFunctionName extends 'dripAmount',
@@ -1139,9 +1154,12 @@ export function useErc20FaucetDripAmount<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     functionName: 'dripAmount',
     ...config,
   } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
@@ -1150,7 +1168,8 @@ export function useErc20FaucetDripAmount<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"dripInterval"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetDripInterval<
   TFunctionName extends 'dripInterval',
@@ -1161,9 +1180,12 @@ export function useErc20FaucetDripInterval<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     functionName: 'dripInterval',
     ...config,
   } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
@@ -1172,7 +1194,8 @@ export function useErc20FaucetDripInterval<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"token"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetToken<
   TFunctionName extends 'token',
@@ -1183,9 +1206,12 @@ export function useErc20FaucetToken<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     functionName: 'token',
     ...config,
   } as UseContractReadConfig<typeof erc20FaucetABI, TFunctionName, TSelectData>)
@@ -1194,7 +1220,8 @@ export function useErc20FaucetToken<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetWrite<
   TFunctionName extends string,
@@ -1216,9 +1243,12 @@ export function useErc20FaucetWrite<
         chainId?: TChainId
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof erc20FaucetABI, TFunctionName, TMode>({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     ...config,
   } as any)
 }
@@ -1226,7 +1256,8 @@ export function useErc20FaucetWrite<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"drip"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetDrip<
   TMode extends WriteContractMode = undefined,
@@ -1248,9 +1279,12 @@ export function useErc20FaucetDrip<
         functionName?: 'drip'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof erc20FaucetABI, 'drip', TMode>({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     functionName: 'drip',
     ...config,
   } as any)
@@ -1259,7 +1293,8 @@ export function useErc20FaucetDrip<
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function usePrepareErc20FaucetWrite<TFunctionName extends string>(
   config: Omit<
@@ -1267,9 +1302,12 @@ export function usePrepareErc20FaucetWrite<TFunctionName extends string>(
     'abi' | 'address'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     ...config,
   } as UsePrepareContractWriteConfig<typeof erc20FaucetABI, TFunctionName>)
 }
@@ -1277,7 +1315,8 @@ export function usePrepareErc20FaucetWrite<TFunctionName extends string>(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link erc20FaucetABI}__ and `functionName` set to `"drip"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function usePrepareErc20FaucetDrip(
   config: Omit<
@@ -1285,9 +1324,12 @@ export function usePrepareErc20FaucetDrip(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     functionName: 'drip',
     ...config,
   } as UsePrepareContractWriteConfig<typeof erc20FaucetABI, 'drip'>)
@@ -1296,7 +1338,8 @@ export function usePrepareErc20FaucetDrip(
 /**
  * Wraps __{@link useContractEvent}__ with `abi` set to __{@link erc20FaucetABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetEvent<TEventName extends string>(
   config: Omit<
@@ -1304,9 +1347,12 @@ export function useErc20FaucetEvent<TEventName extends string>(
     'abi' | 'address'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractEvent({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     ...config,
   } as UseContractEventConfig<typeof erc20FaucetABI, TEventName>)
 }
@@ -1314,7 +1360,8 @@ export function useErc20FaucetEvent<TEventName extends string>(
 /**
  * Wraps __{@link useContractEvent}__ with `abi` set to __{@link erc20FaucetABI}__ and `eventName` set to `"Drip"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0xacd362a06092E1598F4f57D124F3D5E0F31b1F85)
  */
 export function useErc20FaucetDripEvent(
   config: Omit<
@@ -1322,9 +1369,12 @@ export function useErc20FaucetDripEvent(
     'abi' | 'address' | 'eventName'
   > & { chainId?: keyof typeof erc20FaucetAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractEvent({
     abi: erc20FaucetABI,
-    address: erc20FaucetAddress[31337],
+    address: erc20FaucetAddress[chainId as keyof typeof erc20FaucetAddress],
     eventName: 'Drip',
     ...config,
   } as UseContractEventConfig<typeof erc20FaucetABI, 'Drip'>)
@@ -2000,7 +2050,8 @@ export function useIerc20MetadataTransferEvent(
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCRead<
   TFunctionName extends string,
@@ -2011,9 +2062,12 @@ export function useZarCRead<
     'abi' | 'address'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
 }
@@ -2021,7 +2075,8 @@ export function useZarCRead<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"allowance"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCAllowance<
   TFunctionName extends 'allowance',
@@ -2032,9 +2087,12 @@ export function useZarCAllowance<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'allowance',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2043,7 +2101,8 @@ export function useZarCAllowance<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"balanceOf"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCBalanceOf<
   TFunctionName extends 'balanceOf',
@@ -2054,9 +2113,12 @@ export function useZarCBalanceOf<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'balanceOf',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2065,7 +2127,8 @@ export function useZarCBalanceOf<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"decimals"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCDecimals<
   TFunctionName extends 'decimals',
@@ -2076,9 +2139,12 @@ export function useZarCDecimals<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'decimals',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2087,7 +2153,8 @@ export function useZarCDecimals<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"getAllowances"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCGetAllowances<
   TFunctionName extends 'getAllowances',
@@ -2098,9 +2165,12 @@ export function useZarCGetAllowances<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'getAllowances',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2109,7 +2179,8 @@ export function useZarCGetAllowances<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"getApprovals"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCGetApprovals<
   TFunctionName extends 'getApprovals',
@@ -2120,9 +2191,12 @@ export function useZarCGetApprovals<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'getApprovals',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2131,7 +2205,8 @@ export function useZarCGetApprovals<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"name"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCName<
   TFunctionName extends 'name',
@@ -2142,9 +2217,12 @@ export function useZarCName<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'name',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2153,7 +2231,8 @@ export function useZarCName<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"symbol"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCSymbol<
   TFunctionName extends 'symbol',
@@ -2164,9 +2243,12 @@ export function useZarCSymbol<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'symbol',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2175,7 +2257,8 @@ export function useZarCSymbol<
 /**
  * Wraps __{@link useContractRead}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"totalSupply"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCTotalSupply<
   TFunctionName extends 'totalSupply',
@@ -2186,9 +2269,12 @@ export function useZarCTotalSupply<
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractRead({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'totalSupply',
     ...config,
   } as UseContractReadConfig<typeof zarCABI, TFunctionName, TSelectData>)
@@ -2197,7 +2283,8 @@ export function useZarCTotalSupply<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCWrite<
   TFunctionName extends string,
@@ -2216,9 +2303,12 @@ export function useZarCWrite<
         chainId?: TChainId
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, TFunctionName, TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     ...config,
   } as any)
 }
@@ -2226,7 +2316,8 @@ export function useZarCWrite<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"approve"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCApprove<
   TMode extends WriteContractMode = undefined,
@@ -2245,9 +2336,12 @@ export function useZarCApprove<
         functionName?: 'approve'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, 'approve', TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'approve',
     ...config,
   } as any)
@@ -2256,7 +2350,8 @@ export function useZarCApprove<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"decreaseAllowance"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCDecreaseAllowance<
   TMode extends WriteContractMode = undefined,
@@ -2282,9 +2377,12 @@ export function useZarCDecreaseAllowance<
         functionName?: 'decreaseAllowance'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, 'decreaseAllowance', TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'decreaseAllowance',
     ...config,
   } as any)
@@ -2293,7 +2391,8 @@ export function useZarCDecreaseAllowance<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"increaseAllowance"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCIncreaseAllowance<
   TMode extends WriteContractMode = undefined,
@@ -2319,9 +2418,12 @@ export function useZarCIncreaseAllowance<
         functionName?: 'increaseAllowance'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, 'increaseAllowance', TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'increaseAllowance',
     ...config,
   } as any)
@@ -2330,7 +2432,8 @@ export function useZarCIncreaseAllowance<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"transfer"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCTransfer<
   TMode extends WriteContractMode = undefined,
@@ -2352,9 +2455,12 @@ export function useZarCTransfer<
         functionName?: 'transfer'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, 'transfer', TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'transfer',
     ...config,
   } as any)
@@ -2363,7 +2469,8 @@ export function useZarCTransfer<
 /**
  * Wraps __{@link useContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"transferFrom"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCTransferFrom<
   TMode extends WriteContractMode = undefined,
@@ -2389,9 +2496,12 @@ export function useZarCTransferFrom<
         functionName?: 'transferFrom'
       } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractWrite<typeof zarCABI, 'transferFrom', TMode>({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'transferFrom',
     ...config,
   } as any)
@@ -2400,7 +2510,8 @@ export function useZarCTransferFrom<
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCWrite<TFunctionName extends string>(
   config: Omit<
@@ -2408,9 +2519,12 @@ export function usePrepareZarCWrite<TFunctionName extends string>(
     'abi' | 'address'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, TFunctionName>)
 }
@@ -2418,7 +2532,8 @@ export function usePrepareZarCWrite<TFunctionName extends string>(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"approve"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCApprove(
   config: Omit<
@@ -2426,9 +2541,12 @@ export function usePrepareZarCApprove(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'approve',
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, 'approve'>)
@@ -2437,7 +2555,8 @@ export function usePrepareZarCApprove(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"decreaseAllowance"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCDecreaseAllowance(
   config: Omit<
@@ -2445,9 +2564,12 @@ export function usePrepareZarCDecreaseAllowance(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'decreaseAllowance',
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, 'decreaseAllowance'>)
@@ -2456,7 +2578,8 @@ export function usePrepareZarCDecreaseAllowance(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"increaseAllowance"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCIncreaseAllowance(
   config: Omit<
@@ -2464,9 +2587,12 @@ export function usePrepareZarCIncreaseAllowance(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'increaseAllowance',
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, 'increaseAllowance'>)
@@ -2475,7 +2601,8 @@ export function usePrepareZarCIncreaseAllowance(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"transfer"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCTransfer(
   config: Omit<
@@ -2483,9 +2610,12 @@ export function usePrepareZarCTransfer(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'transfer',
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, 'transfer'>)
@@ -2494,7 +2624,8 @@ export function usePrepareZarCTransfer(
 /**
  * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link zarCABI}__ and `functionName` set to `"transferFrom"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function usePrepareZarCTransferFrom(
   config: Omit<
@@ -2502,9 +2633,12 @@ export function usePrepareZarCTransferFrom(
     'abi' | 'address' | 'functionName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return usePrepareContractWrite({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     functionName: 'transferFrom',
     ...config,
   } as UsePrepareContractWriteConfig<typeof zarCABI, 'transferFrom'>)
@@ -2513,7 +2647,8 @@ export function usePrepareZarCTransferFrom(
 /**
  * Wraps __{@link useContractEvent}__ with `abi` set to __{@link zarCABI}__.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCEvent<TEventName extends string>(
   config: Omit<
@@ -2521,9 +2656,12 @@ export function useZarCEvent<TEventName extends string>(
     'abi' | 'address'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractEvent({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     ...config,
   } as UseContractEventConfig<typeof zarCABI, TEventName>)
 }
@@ -2531,7 +2669,8 @@ export function useZarCEvent<TEventName extends string>(
 /**
  * Wraps __{@link useContractEvent}__ with `abi` set to __{@link zarCABI}__ and `eventName` set to `"Approval"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCApprovalEvent(
   config: Omit<
@@ -2539,9 +2678,12 @@ export function useZarCApprovalEvent(
     'abi' | 'address' | 'eventName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractEvent({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     eventName: 'Approval',
     ...config,
   } as UseContractEventConfig<typeof zarCABI, 'Approval'>)
@@ -2550,7 +2692,8 @@ export function useZarCApprovalEvent(
 /**
  * Wraps __{@link useContractEvent}__ with `abi` set to __{@link zarCABI}__ and `eventName` set to `"Transfer"`.
  *
- *
+ * -
+ * - [__View Contract on Sepolia Etherscan__](https://sepolia.etherscan.io/address/0x1f4eEF9E322B434bC2501bCb4FA4A5aFcfc24530)
  */
 export function useZarCTransferEvent(
   config: Omit<
@@ -2558,9 +2701,12 @@ export function useZarCTransferEvent(
     'abi' | 'address' | 'eventName'
   > & { chainId?: keyof typeof zarCAddress } = {} as any,
 ) {
+  const { chain } = useNetwork()
+  const defaultChainId = useChainId()
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId
   return useContractEvent({
     abi: zarCABI,
-    address: zarCAddress[31337],
+    address: zarCAddress[chainId as keyof typeof zarCAddress],
     eventName: 'Transfer',
     ...config,
   } as UseContractEventConfig<typeof zarCABI, 'Transfer'>)
